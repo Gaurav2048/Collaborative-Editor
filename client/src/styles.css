@@ -1,0 +1,977 @@
+@import "./theme/tokens.css";
+
+.folio-editor {
+  font-family: inherit;
+  color: var(--folio-fg);
+  background: var(--folio-bg);
+}
+.folio-editor * {
+  box-sizing: border-box;
+}
+.folio-editor button,
+.folio-editor input,
+.folio-editor textarea,
+.folio-editor select {
+  font: inherit;
+}
+.folio-editor button {
+  cursor: pointer;
+  border: 0;
+  background: none;
+  color: inherit;
+  padding: 8px 10px;
+  border-radius: 6px;
+}
+.folio-editor button:hover {
+  background: var(--folio-hover);
+}
+.folio-editor button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.folio-editor a {
+  color: var(--folio-accent);
+}
+.folio-editor input,
+.folio-editor textarea {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 10px;
+  color: inherit;
+  background: var(--folio-surface);
+}
+.folio-editor textarea {
+  resize: vertical;
+  min-height: 90px;
+  line-height: 1.6;
+}
+.folio-editor button,
+.folio-editor input,
+.folio-editor textarea,
+.folio-editor select {
+  outline-color: var(--folio-accent);
+}
+.folio-editor h2,
+.folio-editor h3,
+.folio-editor h4,
+.folio-editor p {
+  margin-top: 0;
+}
+.folio-editor.app {
+  display: flex;
+  min-height: 100vh;
+}
+.folio-editor .rail {
+  width: 72px;
+  position: fixed;
+  inset: 0 auto 0 0;
+  background: var(--folio-sidebar);
+  border-right: 1px solid var(--folio-border);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-direction: column;
+  padding: 23px 10px;
+}
+.folio-editor .brand {
+  font: bold 43px Georgia;
+  text-decoration: none;
+  line-height: 1;
+}
+.folio-editor .brand span {
+  font-size: 20px;
+  color: var(--folio-accent);
+}
+.folio-editor .rail-divider {
+  width: 30px;
+  height: 1px;
+  background: var(--folio-border);
+  margin: 10px 0;
+}
+.folio-editor .rail > button {
+  font-size: 24px;
+}
+.folio-editor .rail-active {
+  background: var(--folio-soft);
+  color: var(--folio-accent);
+}
+.folio-editor .grow {
+  flex: 1;
+}
+.folio-editor .rail-label {
+  writing-mode: vertical-rl;
+  letter-spacing: 4px;
+  font-size: 10px;
+  color: var(--folio-muted);
+}
+.folio-editor .workspace {
+  margin-left: 72px;
+  width: calc(100% - 72px);
+}
+.folio-editor header {
+  height: 80px;
+  background: var(--folio-surface);
+  border-bottom: 1px solid var(--line);
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+.folio-editor .breadcrumb {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--folio-muted);
+}
+.folio-editor .breadcrumb strong {
+  font-weight: 500;
+  color: var(--folio-fg);
+}
+.folio-editor .private-label {
+  font-size: 9px;
+  border: 1px solid var(--line);
+  padding: 5px 7px;
+  border-radius: 4px;
+}
+.folio-editor .header-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.folio-editor .primary {
+  background: var(--folio-accent);
+  color: white;
+  padding: 10px 16px;
+}
+.folio-editor .primary:hover {
+  background: var(--folio-accent-hover);
+}
+.folio-editor .connection {
+  font-size: 10px;
+  color: var(--folio-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.folio-editor .connection b {
+  display: block;
+  width: 6px;
+  height: 6px;
+  background: #22a06b;
+  border-radius: 50%;
+}
+.folio-editor .connection.offline b {
+  background: #c89044;
+}
+.folio-editor .avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.folio-editor .avatar-stack {
+  display: flex;
+  padding-left: 6px;
+}
+.folio-editor .avatar-stack .avatar {
+  margin-left: -6px;
+  border: 2px solid var(--folio-surface);
+}
+.folio-editor .invite {
+  font-size: 11px;
+  border: 1px solid var(--line);
+}
+.folio-editor .subheader {
+  height: 47px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  color: var(--folio-muted);
+  font-size: 10px;
+}
+.folio-editor .subheader > span:first-child {
+  font-size: 9px;
+  letter-spacing: 1.7px;
+}
+.folio-editor .body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 318px;
+  min-height: calc(100vh - 175px);
+}
+.folio-editor main {
+  background: var(--folio-surface);
+  min-width: 0;
+  padding-bottom: 65px;
+}
+.folio-editor .document-heading {
+  padding: 45px 8% 27px;
+}
+.folio-editor .eyebrow {
+  font-size: 9px;
+  letter-spacing: 1.7px;
+  color: var(--folio-muted);
+  font-weight: 600;
+}
+.folio-editor .eyebrow span {
+  margin: 0 9px;
+  color: var(--folio-muted);
+}
+.folio-editor .page-icon {
+  font-size: 43px;
+  color: var(--folio-accent);
+  margin: 25px 0 15px;
+}
+.folio-editor .document-title {
+  font-weight: 750;
+  font-size: clamp(25px, 2.6vw, 40px);
+  line-height: 1.3;
+  border: 0;
+  padding: 0;
+  width: 100%;
+  letter-spacing: -1.5px;
+  background: none;
+}
+.folio-editor .document-title:focus {
+  outline: 0;
+}
+.folio-editor .document-meta {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 10px;
+  color: var(--folio-muted);
+  margin-top: 20px;
+}
+.folio-editor .document-meta .avatar {
+  width: 21px;
+  height: 21px;
+  font-size: 8px;
+}
+.folio-editor .document-meta button {
+  padding: 0;
+  font-size: 10px;
+  color: var(--folio-muted);
+}
+.folio-editor .toolbar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-wrap: wrap;
+  border-block: 1px solid var(--line);
+  padding: 8px 3%;
+  position: sticky;
+  top: 0;
+  background: var(--folio-surface);
+  z-index: 5;
+}
+.folio-editor .toolbar button {
+  font-size: 11px;
+  padding: 7px;
+}
+.folio-editor .toolbar select {
+  border: 0;
+  background: none;
+  font-size: 11px;
+  width: 104px;
+  color: var(--folio-muted);
+}
+.folio-editor .toolbar i {
+  height: 18px;
+  width: 1px;
+  background: var(--line);
+  margin: 0 5px;
+}
+.folio-editor .is-active {
+  background: var(--folio-soft);
+}
+.folio-editor .document-content {
+  padding: 28px 8% 20px;
+  outline: none;
+  min-height: 350px;
+  line-height: 1.9;
+  font-size: 14px;
+  color: var(--folio-fg);
+  overflow-wrap: anywhere;
+}
+.folio-editor .document-content h1,
+.folio-editor .document-content h2,
+.folio-editor .document-content h3 {
+  line-height: 1.4;
+  color: var(--folio-fg);
+  margin: 26px 0 12px;
+  letter-spacing: -0.5px;
+}
+.folio-editor .document-content h2 {
+  font-size: 21px;
+}
+.folio-editor .document-content h1 {
+  font-size: 28px;
+}
+.folio-editor .document-content p {
+  margin-bottom: 17px;
+}
+.folio-editor .document-content blockquote {
+  border-left: 3px solid var(--folio-border);
+  padding-left: 18px;
+  margin-left: 0;
+}
+.folio-editor .document-content pre {
+  background: var(--folio-hover);
+  padding: 18px;
+  border-radius: 8px;
+  overflow: auto;
+}
+.folio-editor .document-content code {
+  background: var(--folio-hover);
+  border-radius: 4px;
+  padding: 2px 5px;
+}
+.folio-editor .document-content table {
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+}
+.folio-editor .document-content td,
+.folio-editor .document-content th {
+  border: 1px solid var(--folio-border);
+  padding: 8px;
+  min-width: 40px;
+  position: relative;
+}
+.folio-editor .document-content th {
+  background: var(--folio-hover);
+}
+.folio-editor .selectedCell:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--folio-highlight);
+  pointer-events: none;
+}
+.folio-editor .document-content ul[data-type="taskList"] {
+  padding: 0;
+  list-style: none;
+}
+.folio-editor .document-content li[data-type="taskItem"] {
+  display: flex;
+  gap: 10px;
+}
+.folio-editor .document-content li[data-type="taskItem"] > div {
+  flex: 1;
+}
+.folio-editor .document-end {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--folio-muted);
+  padding: 15px 8%;
+  font-size: 21px;
+}
+.folio-editor .document-end span {
+  font-size: 10px;
+}
+.folio-editor .comments {
+  padding: 29px 23px;
+  background: var(--folio-sidebar);
+  border-left: 1px solid var(--line);
+  min-width: 0;
+}
+.folio-editor .section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.folio-editor .section-title h3 {
+  font-size: 14px;
+  margin: 0;
+}
+.folio-editor .count {
+  background: var(--folio-soft);
+  border-radius: 5px;
+  padding: 2px 6px;
+  font-size: 10px;
+  color: var(--folio-muted);
+}
+.folio-editor .muted {
+  color: var(--folio-muted);
+  line-height: 1.6;
+}
+.folio-editor .small {
+  font-size: 11px;
+}
+.folio-editor .comments > .muted {
+  margin-top: 8px;
+}
+.folio-editor .tabs {
+  display: flex;
+  gap: 19px;
+  border-bottom: 1px solid var(--folio-border);
+  margin: 24px 0;
+}
+.folio-editor .tabs button {
+  font-size: 11px;
+  color: var(--folio-muted);
+  border-radius: 0;
+  padding: 0 2px 10px;
+}
+.folio-editor .tabs .active {
+  color: var(--folio-accent);
+  border-bottom: 2px solid var(--folio-accent);
+}
+.folio-editor .empty-comments {
+  text-align: center;
+  padding: 45px 0;
+  color: var(--folio-muted);
+}
+.folio-editor .empty-comments > span {
+  font-size: 29px;
+  display: block;
+  margin-bottom: 17px;
+}
+.folio-editor .empty-comments h4 {
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 9px;
+  color: var(--folio-muted);
+}
+.folio-editor .empty-comments p {
+  font-size: 11px;
+  line-height: 1.8;
+}
+.folio-editor .empty-comments kbd {
+  font-size: 9px;
+  border: 1px solid var(--folio-border);
+  padding: 6px;
+  border-radius: 4px;
+}
+.folio-editor .comment-card {
+  padding: 14px;
+  background: var(--folio-surface);
+  border: 1px solid var(--folio-border);
+  border-radius: 9px;
+  margin: 14px 0;
+}
+.folio-editor .comment-card.active {
+  border-color: var(--folio-accent);
+}
+.folio-editor .quote,
+.folio-editor .comment-card blockquote {
+  font-size: 11px;
+  background: var(--folio-soft);
+  border-left: 2px solid var(--folio-accent);
+  padding: 8px 10px;
+  text-align: left;
+  width: 100%;
+  margin: 0 0 14px;
+  color: var(--folio-muted);
+  border-radius: 0;
+  display: block;
+}
+.folio-editor .quote small {
+  display: block;
+  color: var(--folio-muted);
+  margin-top: 6px;
+}
+.folio-editor .message {
+  display: flex;
+  gap: 8px;
+  margin: 14px 0;
+}
+.folio-editor .message .avatar {
+  width: 25px;
+  height: 25px;
+  font-size: 8px;
+}
+.folio-editor .message > div {
+  min-width: 0;
+  flex: 1;
+}
+.folio-editor .message strong {
+  font-size: 10px;
+}
+.folio-editor .message time {
+  display: block;
+  font-size: 8px;
+  color: var(--folio-muted);
+  margin: 3px 0 8px;
+}
+.folio-editor .message p {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 0;
+}
+.folio-editor .comment-card input,
+.folio-editor .comment-card textarea {
+  width: 100%;
+  font-size: 11px;
+}
+.folio-editor .row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 9px;
+  font-size: 10px;
+}
+.folio-editor .comment-highlight {
+  background: var(--folio-highlight);
+  border-bottom: 2px solid var(--folio-accent);
+  cursor: pointer;
+}
+.folio-editor .comment-pin {
+  display: inline-flex;
+  vertical-align: super;
+  font-size: 9px;
+  padding: 0 3px;
+  margin: 0 2px;
+  background: var(--folio-soft);
+  color: var(--folio-accent);
+  line-height: 14px;
+  border-radius: 3px;
+}
+.folio-editor .collaboration-carets__caret {
+  border-left: 1px solid;
+  border-right: 1px solid;
+  margin-left: -1px;
+  margin-right: -1px;
+  pointer-events: none;
+  position: relative;
+  word-break: normal;
+}
+.folio-editor .collaboration-carets__label {
+  border-radius: 3px;
+  color: white;
+  font-size: 10px;
+  left: -1px;
+  line-height: normal;
+  padding: 2px 5px;
+  position: absolute;
+  top: -1.4em;
+  white-space: nowrap;
+}
+.folio-editor .diagram-block,
+.folio-editor .media-block {
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  overflow: hidden;
+  margin: 24px 0;
+  background: var(--folio-surface);
+}
+.folio-editor .selected {
+  outline: 2px solid var(--folio-accent);
+}
+.folio-editor .block-label {
+  padding: 10px 14px;
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--folio-muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+}
+.folio-editor .block-label button {
+  font-size: 10px;
+  letter-spacing: 0;
+}
+.folio-editor .diagram-block > img {
+  display: block;
+  width: 100%;
+  max-height: 450px;
+  object-fit: contain;
+  padding: 28px;
+}
+.folio-editor .diagram-edit {
+  padding: 15px;
+}
+.folio-editor .diagram-edit textarea {
+  width: 100%;
+  font-family: monospace;
+}
+.folio-editor .media-block > img {
+  display: block;
+  max-width: 100%;
+  max-height: 600px;
+  margin: auto;
+}
+.folio-editor .media-block > div {
+  padding: 7px 12px;
+  font-size: 11px;
+}
+.folio-editor .media-block input {
+  border: 0;
+  background: none;
+  width: 100%;
+  font-size: 11px;
+  text-align: center;
+}
+.folio-editor .media-block small {
+  margin-right: 10px;
+}
+.folio-editor footer {
+  height: 48px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 32px;
+  font-size: 10px;
+  color: var(--folio-muted);
+  background: var(--folio-sidebar);
+}
+.folio-editor footer > span {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.folio-editor .footer-muted {
+  color: var(--folio-muted);
+}
+.folio-editor footer button {
+  font-size: 10px;
+}
+.folio-editor .modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgb(0 0 0 / 45%);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 30;
+}
+.folio-editor .modal {
+  width: 580px;
+  max-height: 90vh;
+  overflow: auto;
+  border-radius: 16px;
+  background: var(--folio-surface);
+  padding: 36px;
+  position: relative;
+  box-shadow: 0 30px 100px rgb(0 0 0 / 22%);
+}
+.folio-editor .modal h2 {
+  letter-spacing: -1px;
+  font-size: 27px;
+  margin: 14px 0;
+}
+.folio-editor .close {
+  position: absolute;
+  right: 15px;
+  top: 12px;
+  font-size: 24px;
+  color: var(--folio-muted);
+}
+.folio-editor .modal p {
+  font-size: 12px;
+}
+.folio-editor .modal label {
+  display: block;
+  font-size: 11px;
+  color: var(--folio-muted);
+  margin: 17px 0;
+}
+.folio-editor .modal label input {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+}
+.folio-editor .modal h3 {
+  font-size: 14px;
+  margin-top: 25px;
+}
+.folio-editor .user-list {
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  overflow: hidden;
+}
+.folio-editor .user-list > button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px;
+  text-align: left;
+}
+.folio-editor .user-list span {
+  font-size: 12px;
+}
+.folio-editor .user-list small {
+  margin-left: auto;
+  font-size: 10px;
+  color: var(--folio-muted);
+}
+.folio-editor .tool-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 24px 0;
+}
+.folio-editor .tool-options button {
+  border: 1px solid var(--line);
+  text-align: left;
+  padding: 16px 10px;
+}
+.folio-editor .tool-options strong {
+  display: block;
+  font-size: 12px;
+}
+.folio-editor .tool-options small {
+  display: block;
+  font-size: 9px;
+  color: var(--folio-muted);
+  margin-top: 7px;
+}
+.folio-editor .tool-options .selected {
+  border-color: var(--folio-accent);
+  background: var(--folio-soft);
+  outline: none;
+}
+.folio-editor .code-input {
+  width: 100%;
+  height: 210px;
+  font-family: monospace;
+  font-size: 12px;
+  background: var(--folio-hover);
+}
+.folio-editor .modal a {
+  font-size: 11px;
+}
+.folio-editor .modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 25px;
+  font-size: 12px;
+}
+.folio-editor .notice {
+  padding: 12px 30px;
+  background: var(--folio-soft);
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.folio-editor .loading {
+  padding: 30px 8%;
+  font-size: 13px;
+  color: var(--folio-muted);
+}
+@media (max-width: 1100px) {
+  .connection,
+  .private-label {
+    display: none;
+  }
+  .folio-editor .body {
+    grid-template-columns: minmax(0, 1fr) 280px;
+  }
+  .folio-editor .toolbar {
+    gap: 0;
+  }
+  .folio-editor .toolbar button {
+    padding: 6px;
+  }
+  .folio-editor .document-meta {
+    flex-wrap: wrap;
+  }
+  .folio-editor .header-actions {
+    gap: 7px;
+  }
+  .folio-editor header {
+    padding: 0 20px;
+  }
+}
+@media (max-width: 760px) {
+  .rail {
+    display: none;
+  }
+  .folio-editor .workspace {
+    margin: 0;
+    width: 100%;
+  }
+  .folio-editor .body {
+    display: flex;
+    flex-direction: column;
+  }
+  .folio-editor .comments {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+  .folio-editor header {
+    height: 65px;
+  }
+  .folio-editor .breadcrumb {
+    font-size: 11px;
+  }
+  .folio-editor .breadcrumb > span,
+  .folio-editor .avatar-stack,
+  .folio-editor .invite,
+  .folio-editor .subheader > span:last-child {
+    display: none;
+  }
+  .folio-editor .document-heading {
+    padding-top: 30px;
+  }
+  .folio-editor .document-title {
+    font-size: 30px;
+  }
+  .folio-editor .footer-muted {
+    display: none;
+  }
+  .folio-editor footer {
+    padding: 0 15px;
+    font-size: 9px;
+  }
+  .folio-editor .modal {
+    padding: 26px;
+  }
+}
+
+/* Compact Jailbreak workspace chrome and accessible interactive states. */
+.folio-editor .primary {
+  color: var(--folio-on-accent);
+}
+.folio-editor .rail {
+  width: 60px;
+  gap: 14px;
+  padding: 18px 8px;
+  background:
+    radial-gradient(ellipse at 0 0, var(--folio-soft), transparent 65%),
+    var(--folio-sidebar);
+}
+.folio-editor .workspace {
+  margin-left: 60px;
+  width: calc(100% - 60px);
+}
+.folio-editor header {
+  height: 64px;
+  padding-inline: 24px;
+}
+.folio-editor .subheader {
+  height: 36px;
+}
+.folio-editor .body {
+  min-height: calc(100vh - 140px);
+}
+.folio-editor .document-heading {
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+.folio-editor .page-icon {
+  margin: 18px 0 12px;
+  font-size: 34px;
+}
+.folio-editor .document-title {
+  font-weight: 650;
+  letter-spacing: -1.1px;
+}
+.folio-editor .comments {
+  padding: 24px 20px;
+}
+.folio-editor .tabs {
+  margin: 18px 0;
+}
+.folio-editor .comment-card {
+  margin: 10px 0;
+  padding: 12px;
+}
+.folio-editor .document-content {
+  line-height: 1.8;
+}
+.folio-editor .document-meta {
+  margin-top: 14px;
+}
+.folio-editor footer {
+  height: 40px;
+}
+.folio-editor .brand {
+  font:
+    650 28px Inter,
+    system-ui,
+    sans-serif;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  background: var(--folio-accent);
+  color: var(--folio-on-accent);
+}
+.folio-editor .brand span {
+  display: none;
+}
+.folio-editor .theme-picker {
+  max-width: 112px;
+  border: 1px solid var(--folio-border);
+  border-radius: 7px;
+  padding: 7px;
+  font-size: 11px;
+  background: var(--folio-surface);
+  color: var(--folio-fg);
+}
+.folio-editor select option {
+  background: var(--folio-surface);
+  color: var(--folio-fg);
+}
+.folio-editor .diagram-block > img {
+  filter: var(--folio-diagram-filter);
+}
+.folio-editor input::placeholder,
+.folio-editor textarea::placeholder {
+  color: var(--folio-muted);
+  opacity: 1;
+}
+.folio-editor :is(button, a, input, textarea, select):focus-visible {
+  outline: 2px solid var(--folio-ring);
+  outline-offset: 3px;
+}
+.folio-editor .document-content ::selection {
+  background: var(--folio-highlight);
+}
+.folio-editor .is-active,
+.folio-editor .rail-active {
+  color: var(--folio-accent);
+}
+.folio-editor .notice {
+  color: var(--folio-fg);
+}
+@media (max-width: 760px) {
+  .folio-editor .workspace {
+    margin: 0;
+    width: 100%;
+  }
+  .folio-editor header {
+    padding-inline: 12px;
+    gap: 8px;
+  }
+  .folio-editor .header-actions {
+    gap: 6px;
+  }
+  .folio-editor .breadcrumb {
+    gap: 5px;
+  }
+  .folio-editor .theme-picker {
+    max-width: 95px;
+    font-size: 10px;
+  }
+  .folio-editor header .primary {
+    padding: 8px;
+    font-size: 11px;
+  }
+  .folio-editor .document-heading {
+    padding-top: 24px;
+  }
+}

@@ -1,0 +1,38 @@
+/* Jailbreak/shadcn tokens are inherited when embedded. Fallbacks make the demo standalone. */
+.folio-editor {
+  --folio-bg: var(--background, #f8f7f5);
+  --folio-surface: var(--card, #ffffff);
+  --folio-sidebar: var(--sidebar, #fafafa);
+  --folio-fg: var(--foreground, #241b20);
+  --folio-muted: var(--muted-foreground, #736b70);
+  --folio-accent: var(--primary, #c10007);
+  --folio-on-accent: var(--primary-foreground, #ffffff);
+  --folio-border: var(--border, #eae5e4);
+  --folio-hover: var(--accent, #f3f1f2);
+  --folio-ring: var(--ring, #c10007);
+  --folio-soft: color-mix(
+    in srgb,
+    var(--folio-accent) 8%,
+    var(--folio-surface)
+  );
+  --folio-accent-hover: color-mix(in srgb, var(--folio-accent) 88%, black);
+  --folio-highlight: color-mix(in srgb, var(--folio-accent) 12%, transparent);
+  --folio-diagram-filter: none;
+  --line: var(--folio-border);
+  color-scheme: light;
+}
+.dark .folio-editor:not([data-theme="light"]),
+.folio-editor[data-theme="dark"] {
+  --folio-bg: var(--background, #18181b);
+  --folio-surface: var(--card, #202024);
+  --folio-sidebar: var(--sidebar, #1c1c20);
+  --folio-fg: var(--foreground, #f4f4f5);
+  --folio-muted: var(--muted-foreground, #a1a1aa);
+  --folio-accent: var(--primary, #ef7080);
+  --folio-on-accent: var(--primary-foreground, #200c10);
+  --folio-border: var(--border, #343439);
+  --folio-hover: var(--accent, #303037);
+  --folio-ring: var(--ring, #ef7080);
+  --folio-diagram-filter: invert(0.9) hue-rotate(180deg);
+  color-scheme: dark;
+}
